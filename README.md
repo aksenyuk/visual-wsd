@@ -13,3 +13,7 @@ More info: [Description](https://raganato.github.io/vwsd/)
 - [Vision Language models: towards multi-modal deep learning](https://theaisummer.com/vision-language-models/)
 
 - [Sparks of Artificial General Intelligence: Early experiments with GPT-4](https://arxiv.org/pdf/2303.12712.pdf)
+
+- [Multimodal Word Sense Disambiguation in Creative Practice](https://arxiv.org/pdf/2007.07758.pdf)
+
+- [Image Captioning Good-Looking Repo](https://github.com/jmisilo/clip-gpt-captioning)
