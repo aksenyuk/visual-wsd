@@ -32,9 +32,9 @@ from aiohttp import ClientResponse
 
 class VisualWSDDownloader:
     """
-    Downloads Visual-WSD dataset in zip format from GDrive handling virus scan page for large files.
-    Unzips this file and removes zip one. Renames folders.
-
+    This class handles the downloading of the Visual-WSD dataset from Google Drive.
+    It manages the virus scan page for large files, downloads the dataset in zip format, unzips it, and cleans up by removing the zip file.
+    Additionally, it provides functionality to rename the dataset directories to a more manageable format.
     """
 
     def __init__(
@@ -104,8 +104,10 @@ class VisualWSDDownloader:
 
 class VisualWSDRestructurer:
     """
-    Renames all trial images (so train and trial image names are not crossed), moves them to train images.
-    Parses txt filed with dataset infor to csv file. Restructures dataset.
+    This class is responsible for reorganizing the Visual-WSD dataset. 
+    It renames and moves trial images to avoid name conflicts with training images, parses text files related to the dataset, 
+    and combines this information into a single CSV file. The class also restructures the dataset into a simplified format 
+    with a specific folder structure and dataset CSV.
     """
 
     def __init__(self, data_path: str, dataset_name: str) -> None:
