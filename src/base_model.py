@@ -51,7 +51,8 @@ class BaseModel(ABC, nn.Module):
         where on first place would be logit for target.
 
         Args:
-            data (Dict[str, torch.Tensor]): A dictionary containing textual and visual inputs. Expected keys are 'word', 'context', 'target', and 'other_images'.
+            data (Dict[str, torch.Tensor]): A dictionary containing textual and visual inputs. 
+            Expected keys are 'word', 'context', 'target', and 'other_images'.
 
         Returns:
             torch.Tensor: A tensor of logits of size [batch_size, 10].
