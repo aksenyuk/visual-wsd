@@ -1,9 +1,10 @@
 import os
 import random
-from typing import Literal, Tuple, Union
+from typing import Literal
 
 import numpy as np
 import torch
+from sklearn.metrics import f1_score
 from torch.utils.data import DataLoader
 from torchvision.transforms import (
     CenterCrop,
@@ -15,7 +16,6 @@ from torchvision.transforms import (
 )
 
 from datasets import VisualWSDDataset
-
 
 transform = Compose(
     [
@@ -39,7 +39,7 @@ def get_loaders(
     num_workers: int = 0,
     shuffle: bool = True,
     split_ratio: float = 0.8,
-) -> Union[DataLoader, Tuple[DataLoader, DataLoader]]:
+) -> DataLoader | tuple[DataLoader, DataLoader]:
     if mode == "eval":
         eval_dataset = VisualWSDDataset(
             path=path,
@@ -90,7 +90,17 @@ def get_loaders(
         )
 
 
-def seed_everything(seed):
+def get_metrics(targets: list, ranks: list) -> tuple(float):
+    accuracy = sum(targets) / len(targets)
+
+    f1 = f1_score(targets, [1] * len(targets))
+
+    mrr = np.mean([1 / rank for rank in ranks])
+
+    return accuracy, f1, mrr
+
+
+def seed_everything(seed: int) -> None:
     random.seed(seed)
     os.environ["PYTHONHASHSEED"] = str(seed)
     np.random.seed(seed)
