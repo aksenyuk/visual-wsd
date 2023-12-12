@@ -1,0 +1,32 @@
+--------------------------------------------------------------------------------------------------
+         SemEval-2023 Task-1 - Visual-WSD: Visual Word Sense Disambiguation (Visual-WSD)
+
+  Alessandro Raganato, Iacer Calixto, Jose Camacho-Collados, Asahi Ushio, Mohammad Taher Pilehvar
+--------------------------------------------------------------------------------------------------
+
+Task: Given a potentially ambiguous word and some limited textual context, the task is to select, among a set of ten candidate images, the one which corresponds to the intended meaning of the target word.
+
+This package contains the train data (v1) and the trial data (v1) for the SemEval-2023 Task-1 Visual-WSD task.
+
+Both the training and trial folders have a directory named "train/trial_images_v1" and two files, with the same number of lines (each line corresponds to an instance):
+
+    * train/trial.data.v1.txt: This is a tab-separated file, each line corresponds to an instance in the following format: 
+
+        target_word <tab> full_phrase <tab> image_1 <tab> image_2 <tab> ... <tab> image_10
+
+	    - "target_word": the potentially ambiguous target word.
+
+   	    - "full_phrase": the textual context containing the target_word.
+
+		- "image_i": corresponds to the "i"th image. In this version, all train/trial images are in the train/trial_images_v1 folder. 
+		
+	* train/trial.gold.v1.txt: This file contains the gold labels. Each line contains the name of the gold image for each corresponding data instance.
+
+
+DISCLAIMER & CONTENT WARNING
+The training data is automatically built and may contain noise in both text and images. Moreover, it may contain NSFW, discomforting and disturbing content.
+   
+For further details, please see https://raganato.github.io/vwsd/ 
+
+Competition page: https://codalab.lisn.upsaclay.fr/competitions/8190 
+
