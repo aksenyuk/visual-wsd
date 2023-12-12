@@ -23,7 +23,7 @@ from zipfile import ZipFile
 
 import aiohttp
 import pandas as pd
-from aiohttp import ClientResponse
+from aiohttp import ClientResponse, ClientTimeout
 
 ###### UNCOMMENT THIS IF YOU RUN IN JUPYTER ENVIROMENT
 # import nest_asyncio
@@ -47,7 +47,10 @@ class VisualWSDDownloader:
     async def download_file_from_google_drive(self) -> None:
         URL = "https://docs.google.com/uc?export=download"
 
-        async with aiohttp.ClientSession() as session:
+        CUSTOM_TIMEOUT = 1000
+        timeout = ClientTimeout(total=CUSTOM_TIMEOUT)
+
+        async with aiohttp.ClientSession(timeout=timeout) as session:
             initial_response = await session.get(
                 URL, params={"id": self.file_gdrive_id}
             )
