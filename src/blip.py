@@ -2,7 +2,7 @@
 import torch
 from PIL import Image
 from torchvision import transforms
-from transformers import CLIPModel, CLIPProcessor
+from transformers import BlipModel, BlipProcessor
 
 import requests 
 from io import BytesIO
@@ -10,14 +10,14 @@ from io import BytesIO
 from base_model import BaseModel
 
 
-class ClipModel(BaseModel):
+class BLIPModel(BaseModel):
     """
     https://huggingface.co/docs/transformers/model_doc/clip
     """
     def __init__(self, model_name):
         super().__init__()
-        self.model = CLIPModel.from_pretrained(model_name)
-        self.processor = CLIPProcessor.from_pretrained(model_name)
+        self.model = BlipModel.from_pretrained(model_name)
+        self.processor = BlipProcessor.from_pretrained(model_name)
 
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model = self.model.to(self.device)
@@ -38,8 +38,8 @@ class ClipModel(BaseModel):
         processed_texts = self.process_text(texts)
         
         output = self.model(input_ids=processed_texts.input_ids, 
-                                 pixel_values=processed_images.pixel_values,
-                                 return_dict=True)
+                            pixel_values=processed_images.pixel_values,
+                            return_dict=True)
         ## similarity scores
         logits_per_image = output.logits_per_image  
         ## softmax for label probabilities
@@ -61,8 +61,8 @@ def load_image(url):
 
 
 if __name__ == '__main__':
-    model_name = 'openai/clip-vit-base-patch32'
-    model = ClipModel(model_name=model_name)
+    model_name = 'Salesforce/blip-image-captioning-base'
+    model = BLIPModel(model_name=model_name)
 
     images = torch.stack([load_image(url) for url in image_urls])
     output = model(images, texts)
