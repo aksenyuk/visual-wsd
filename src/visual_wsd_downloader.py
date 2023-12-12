@@ -70,7 +70,6 @@ class VisualWSDDownloader:
 
     async def save_response_content(self, response: ClientResponse) -> None:
         CHUNK_SIZE = 32768
-
         with open(self.zip_file_path, "wb") as f:
             async for chunk in response.content.iter_chunked(CHUNK_SIZE):
                 if chunk:
@@ -104,9 +103,9 @@ class VisualWSDDownloader:
 
 class VisualWSDRestructurer:
     """
-    This class is responsible for reorganizing the Visual-WSD dataset. 
-    It renames and moves trial images to avoid name conflicts with training images, parses text files related to the dataset, 
-    and combines this information into a single CSV file. The class also restructures the dataset into a simplified format 
+    This class is responsible for reorganizing the Visual-WSD dataset.
+    It renames and moves trial images to avoid name conflicts with training images, parses text files related to the dataset,
+    and combines this information into a single CSV file. The class also restructures the dataset into a simplified format
     with a specific folder structure and dataset CSV.
     """
 

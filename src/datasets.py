@@ -73,6 +73,6 @@ class VisualWSDDataset(Dataset):
             "word": row["word"],
             "context": row["context"],
             "target": target_image,
-            "other_images": candidate_images,
+            "candidate_images": candidate_images,
         }
         return sample
