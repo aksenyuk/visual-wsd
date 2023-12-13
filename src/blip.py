@@ -11,7 +11,7 @@ from base_model import BaseModel
 
 class BLIPModel(BaseModel):
     """
-    https://huggingface.co/docs/transformers/model_doc/clip
+    https://huggingface.co/docs/transformers/model_doc/blip
     """
 
     def __init__(self, model_name):
