@@ -3,10 +3,13 @@ from typing import Literal, Optional
 
 import pandas as pd
 import torch
+import PIL
 from PIL import Image
 from sklearn.model_selection import train_test_split
 from torch.utils.data import Dataset
 from torchvision.transforms import Compose
+
+PIL.Image.MAX_IMAGE_PIXELS = 1000000000
 
 
 class VisualWSDDataset(Dataset):
@@ -72,7 +75,7 @@ class VisualWSDDataset(Dataset):
         sample = {
             "word": row["word"],
             "context": row["context"],
-            "target": target_image,
+            "target": torch.Tensor(target_image),
             "candidate_images": candidate_images,
         }
         return sample

@@ -15,16 +15,15 @@ from torchvision.transforms import (
     ToTensor,
 )
 
-from datasets import VisualWSDDataset
 
 transform = Compose(
     [
         Resize(224, interpolation=InterpolationMode.BICUBIC),
         CenterCrop(224),
         ToTensor(),
-        Normalize(
-            (0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711)
-        ),
+        # Normalize(
+        #     (0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711)
+        # ),
     ]
 )
 
@@ -90,7 +89,7 @@ def get_loaders(
         )
 
 
-def get_metrics(targets: list, ranks: list) -> tuple(float):
+def get_metrics(targets: list, ranks: list) -> tuple[float]:
     accuracy = sum(targets) / len(targets)
 
     f1 = f1_score(targets, [1] * len(targets))
