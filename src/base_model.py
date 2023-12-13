@@ -51,7 +51,7 @@ class BaseModel(ABC, nn.Module):
         where on first place would be logit for target.
 
         Args:
-            data (Dict[str, torch.Tensor]): A dictionary containing textual and visual inputs. 
+            data (Dict[str, torch.Tensor]): A dictionary containing textual and visual inputs.
             Expected keys are 'word', 'context', 'target', and 'other_images'.
 
         Returns:
