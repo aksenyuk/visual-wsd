@@ -15,6 +15,7 @@ from torchvision.transforms import (
     ToTensor,
 )
 
+from utils import VisualWSDDataset
 
 transform = Compose(
     [

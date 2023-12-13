@@ -3,6 +3,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
+from utils import get_metrics
 
 def evaluate_model(
     model: torch.nn.Module, data_loader: DataLoader

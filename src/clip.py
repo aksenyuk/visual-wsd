@@ -6,6 +6,8 @@ from transformers import CLIPModel, CLIPProcessor
 import requests
 from io import BytesIO
 
+from base_model import BaseModel
+
 
 class ClipModel(BaseModel):
     """
