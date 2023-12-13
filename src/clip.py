@@ -28,13 +28,13 @@ class ClipModel(BaseModel):
         )
         return processed_images
 
-    def process_text(self, texts: list) -> torch.Tensor:
+    def process_text(self, texts: list[str]) -> torch.Tensor:
         processed_texts = self.processor(
             text=texts, return_tensors="pt", padding=True
         ).to(self.device)
         return processed_texts
 
-    def forward(self, images: torch.Tensor, texts: list):
+    def forward(self, images: torch.Tensor, texts: list[str]) -> torch.Tensor:
         images = images.to(self.device)
         logits = torch.zeros(images.shape[0], images.shape[1])
 

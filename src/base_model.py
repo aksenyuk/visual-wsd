@@ -8,14 +8,14 @@ class BaseModel(ABC, nn.Module):
     An abstract base class for models for Visual-WSD dataset.
 
     Attributes:
-        image_processor: A nn.Module or similar object responsible for processing images.
-        text_processor: A nn.Module or similar object responsible for processing text.
+        model: pretrained model.
+        processor: wrapped model's image processor and tokenizer into a single processor.
     """
 
     def __init__(self) -> None:
         super().__init__()
-        self.image_processor = None
-        self.text_processor = None
+        self.model = None
+        self.processor = None
 
     @abstractmethod
     def process_image(self, images: torch.Tensor) -> torch.Tensor:
@@ -31,13 +31,12 @@ class BaseModel(ABC, nn.Module):
         pass
 
     @abstractmethod
-    def process_text(self, phrase: str, word: str) -> torch.Tensor:
+    def process_text(self, texts: list[str]) -> torch.Tensor:
         """
         Process the textual input.
 
         Args:
-            phrase (str): The phrase containing the ambiguous word.
-            word (str): The ambiguous word itself.
+            texts (list[str]): textual content (descriptions of images)
 
         Returns:
             torch.Tensor: The processed text.
@@ -45,14 +44,14 @@ class BaseModel(ABC, nn.Module):
         pass
 
     @abstractmethod
-    def forward(self, data: dict[str, torch.Tensor]) -> torch.Tensor:
+    def forward(self, images: torch.Tensor, texts: list[str]) -> torch.Tensor:
         """
         The forward pass of the model. Should handle both text and image data, and return a tensor of logits,
         where on first place would be logit for target.
 
         Args:
-            data (Dict[str, torch.Tensor]): A dictionary containing textual and visual inputs.
-            Expected keys are 'word', 'context', 'target', and 'other_images'.
+            images (torch.Tensor): visual content
+            texts (list[str]): textual content
 
         Returns:
             torch.Tensor: A tensor of logits of size [batch_size, 10].

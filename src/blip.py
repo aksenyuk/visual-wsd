@@ -28,14 +28,13 @@ class BLIPModel(BaseModel):
         )
         return processed_images
 
-    ## TODO - phrase / word??
-    def process_text(self, texts: list) -> torch.Tensor:
+    def process_text(self, texts: list[str]) -> torch.Tensor:
         processed_texts = self.processor(text=texts, return_tensors="pt").to(
             self.device
         )
         return processed_texts
 
-    def forward(self, images: torch.Tensor, texts: list):
+    def forward(self, images: torch.Tensor, texts: list[str]) -> torch.Tensor:
         processed_images = self.process_image(images)
         processed_texts = self.process_text(texts)
 
