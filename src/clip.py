@@ -44,11 +44,9 @@ class ClipModel(BaseModel):
             pixel_values=processed_images.pixel_values,
             return_dict=True,
         )
-        ## similarity scores
-        logits_per_image = output.logits_per_image
-        ## softmax for label probabilities
-        probs = logits_per_image.softmax(dim=1)
-        return logits_per_image, probs
+
+        logits = output.logits
+        return logits
 
 
 ## EVERYTHING BELOW IS CHECK
