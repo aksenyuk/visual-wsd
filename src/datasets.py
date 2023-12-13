@@ -2,13 +2,12 @@ import os
 from typing import Literal, Optional
 
 import pandas as pd
-import torch
 import PIL
+import torch
 from PIL import Image
 from sklearn.model_selection import train_test_split
 from torch.utils.data import Dataset
 from torchvision.transforms import Compose
-
 
 PIL.Image.MAX_IMAGE_PIXELS = 1000000000
 

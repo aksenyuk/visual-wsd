@@ -1,10 +1,10 @@
+from io import BytesIO
+
+import requests
 import torch
 from PIL import Image
 from torchvision import transforms
 from transformers import BlipModel, BlipProcessor
-
-import requests
-from io import BytesIO
 
 from base_model import BaseModel
 
@@ -50,6 +50,7 @@ class BLIPMODEL(BaseModel):
             logits[idx] = output.logits_per_image.squeeze(1)
 
         return logits
+
 
 ## EVERYTHING BELOW IS CHECK
 # image_urls = [

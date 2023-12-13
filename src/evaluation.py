@@ -1,3 +1,5 @@
+import time
+
 import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
@@ -5,9 +7,11 @@ from tqdm import tqdm
 
 from utils import get_metrics
 
+
 def evaluate_model(
     model: torch.nn.Module, data_loader: DataLoader
 ) -> dict[str, float | list]:
+    start_time = time.time()
     model.eval()
 
     predicted_images = []  # store which image was predicted
@@ -42,13 +46,18 @@ def evaluate_model(
                 all_target_ranks.append(rank)
 
                 all_probs.append(probs[i].tolist())
+            if idx == 4:
+                break
 
-    accuracy, f1, mrr = get_metrics(correct_preds, all_target_ranks)
+    accuracy, f1, precision, recall, mrr = get_metrics(correct_preds, all_target_ranks)
 
     return {
         "accuracy": accuracy,
         "f1": f1,
+        "precision": precision,
+        "recall": recall,
         "mrr": mrr,
+        "time": time.time() - start_time,
         "phrases": phrases,
         "predictions": predicted_images,
     }
