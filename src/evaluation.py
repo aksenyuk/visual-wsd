@@ -46,8 +46,6 @@ def evaluate_model(
                 all_target_ranks.append(rank)
 
                 all_probs.append(probs[i].tolist())
-            if idx == 4:
-                break
 
     accuracy, f1, precision, recall, mrr = get_metrics(correct_preds, all_target_ranks)
 
