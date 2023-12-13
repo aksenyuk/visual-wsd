@@ -35,37 +35,40 @@ class BLIPMODEL(BaseModel):
         return processed_texts
 
     def forward(self, images: torch.Tensor, texts: list[str]) -> torch.Tensor:
-        processed_images = self.process_image(images)
-        processed_texts = self.process_text(texts)
+        images = images.to(self.device)
+        logits = torch.zeros(images.shape[0], images.shape[1])
 
-        output = self.model(
-            input_ids=processed_texts.input_ids,
-            pixel_values=processed_images.pixel_values,
-            return_dict=True,
-        )
+        for idx, sample_images in enumerate(images):
+            processed_sample_images = self.process_image(sample_images)
+            processed_phrase = self.process_text(texts[idx])
 
-        logits = output.logits_per_image
+            output = self.model(
+                input_ids=processed_phrase.input_ids,
+                pixel_values=processed_sample_images.pixel_values,
+                return_dict=True,
+            )
+            logits[idx] = output.logits_per_image.squeeze(1)
+
         return logits
 
-
 ## EVERYTHING BELOW IS CHECK
-image_urls = [
-    "http://images.cocodataset.org/val2017/000000039769.jpg",
-]
-texts = ["a photo of a cat", "a photo of a dog"]
+# image_urls = [
+#     "http://images.cocodataset.org/val2017/000000039769.jpg",
+# ]
+# texts = ["a photo of a cat", "a photo of a dog"]
 
 
-def load_image(url):
-    response = requests.get(url)
-    img = Image.open(BytesIO(response.content)).convert("RGB")
-    transform = transforms.ToTensor()
-    return transform(img)
+# def load_image(url):
+#     response = requests.get(url)
+#     img = Image.open(BytesIO(response.content)).convert("RGB")
+#     transform = transforms.ToTensor()
+#     return transform(img)
 
 
-if __name__ == "__main__":
-    model_name = "Salesforce/blip-image-captioning-base"
-    model = BLIPMODEL(model_name=model_name)
+# if __name__ == "__main__":
+#     model_name = "Salesforce/blip-image-captioning-base"
+#     model = BLIPMODEL(model_name=model_name)
 
-    images = torch.stack([load_image(url) for url in image_urls])
-    output = model(images, texts)
-    print(output)
+#     images = torch.stack([load_image(url) for url in image_urls])
+#     output = model(images, texts)
+#     print(output)
