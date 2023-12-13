@@ -45,7 +45,7 @@ class BLIPModel(BaseModel):
             return_dict=True,
         )
 
-        logits = output.logits
+        logits = output.logits_per_image
         return logits
 
 
