@@ -9,7 +9,7 @@ from io import BytesIO
 from base_model import BaseModel
 
 
-class ClipModel(BaseModel):
+class CLIPMODEL(BaseModel):
     """
     https://huggingface.co/docs/transformers/model_doc/clip
     """
@@ -68,7 +68,7 @@ class ClipModel(BaseModel):
 
 # if __name__ == "__main__":
 #     model_name = "openai/clip-vit-base-patch32"
-#     model = ClipModel(model_name=model_name)
+#     model = CLIPMODEL(model_name=model_name)
 
 #     images = torch.stack([load_image(url) for url in image_urls])
 #     output = model(images, texts)

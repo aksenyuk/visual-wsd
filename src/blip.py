@@ -9,7 +9,7 @@ from io import BytesIO
 from base_model import BaseModel
 
 
-class BLIPModel(BaseModel):
+class BLIPMODEL(BaseModel):
     """
     https://huggingface.co/docs/transformers/model_doc/blip
     """
@@ -64,7 +64,7 @@ def load_image(url):
 
 if __name__ == "__main__":
     model_name = "Salesforce/blip-image-captioning-base"
-    model = BLIPModel(model_name=model_name)
+    model = BLIPMODEL(model_name=model_name)
 
     images = torch.stack([load_image(url) for url in image_urls])
     output = model(images, texts)
