@@ -95,9 +95,9 @@ def get_metrics(targets: list, ranks: list) -> tuple[float]:
 
     true_targets = [1] * len(targets)
 
-    f1 = f1_score(targets, true_targets)
-    prec = precision_score(targets, true_targets)
-    rec = recall_score(targets, true_targets)
+    f1 = f1_score(true_targets, targets)
+    prec = precision_score(true_targets, targets)
+    rec = recall_score(true_targets, targets)
 
     mrr = np.mean([1 / rank for rank in ranks])
 
