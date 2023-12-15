@@ -1,10 +1,10 @@
+from io import BytesIO
+
+import requests
 import torch
 from PIL import Image
 from torchvision import transforms
-from transformers import AlignProcessor, AlignModel
-
-import requests
-from io import BytesIO
+from transformers import AlignModel, AlignProcessor
 
 from base_model import BaseModel
 
@@ -51,6 +51,7 @@ class ALIGNMODEL(BaseModel):
 
         return logits
 
+
 ## EVERYTHING BELOW IS CHECK
 # image_urls = [
 #     "http://images.cocodataset.org/val2017/000000039769.jpg",
@@ -72,14 +73,6 @@ class ALIGNMODEL(BaseModel):
 #     images = torch.stack([load_image(url) for url in image_urls])
 #     output = model(images, texts)
 #     print(output)
-
-
-
-
-
-
-
-
 
 
 # processor = AlignProcessor.from_pretrained("kakaobrain/align-base")
