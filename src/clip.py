@@ -1,10 +1,10 @@
+from io import BytesIO
+
+import requests
 import torch
 from PIL import Image
 from torchvision import transforms
 from transformers import CLIPModel, CLIPProcessor
-
-import requests
-from io import BytesIO
 
 from base_model import BaseModel
 

@@ -4,7 +4,7 @@ from typing import Literal
 
 import numpy as np
 import torch
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, precision_score, recall_score
 from torch.utils.data import DataLoader
 from torchvision.transforms import (
     CenterCrop,
@@ -93,11 +93,15 @@ def get_loaders(
 def get_metrics(targets: list, ranks: list) -> tuple[float]:
     accuracy = sum(targets) / len(targets)
 
-    f1 = f1_score(targets, [1] * len(targets))
+    true_targets = [1] * len(targets)
+
+    f1 = f1_score(true_targets, targets)
+    prec = precision_score(true_targets, targets)
+    rec = recall_score(true_targets, targets)
 
     mrr = np.mean([1 / rank for rank in ranks])
 
-    return accuracy, f1, mrr
+    return accuracy, f1, prec, rec, mrr
 
 
 def seed_everything(seed: int) -> None:

@@ -2,8 +2,8 @@ import os
 from typing import Literal, Optional
 
 import pandas as pd
-import torch
 import PIL
+import torch
 from PIL import Image
 from sklearn.model_selection import train_test_split
 from torch.utils.data import Dataset
@@ -59,14 +59,24 @@ class VisualWSDDataset(Dataset):
             row = self.data.iloc[idx]
 
         target_img_name = os.path.join(self.path, self.images_folder, row["target"])
-        target_image = Image.open(target_img_name).convert("RGB")
+        try:
+            target_image = Image.open(target_img_name).convert("RGB")
+        except OSError as e:
+            print(f"\nCorrupted image, placeholder image used. Error message: {e}\n")
+            return self.__getitem__(0)
         if self.transform:
             target_image = self.transform(target_image)
 
         candidate_images = []
         for i in range(1, 10):
             img_name = os.path.join(self.path, self.images_folder, row[f"image_{i}"])
-            image = Image.open(img_name).convert("RGB")
+            try:
+                image = Image.open(img_name).convert("RGB")
+            except OSError as e:
+                print(
+                    f"\nCorrupted image, placeholder image used. Error message: {e}\n"
+                )
+                return self.__getitem__(0)
             if self.transform:
                 image = self.transform(image)
             candidate_images.append(image)
