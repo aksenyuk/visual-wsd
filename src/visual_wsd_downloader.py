@@ -47,7 +47,7 @@ class VisualWSDDownloader:
     async def download_file_from_google_drive(self) -> None:
         URL = "https://docs.google.com/uc?export=download"
 
-        CUSTOM_TIMEOUT = 1000
+        CUSTOM_TIMEOUT = 99999
         timeout = ClientTimeout(total=CUSTOM_TIMEOUT)
 
         async with aiohttp.ClientSession(timeout=timeout) as session:

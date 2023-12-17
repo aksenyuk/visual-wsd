@@ -10,12 +10,12 @@ from torchvision.transforms import (
     CenterCrop,
     Compose,
     InterpolationMode,
-    Normalize,
+    # Normalize,
     Resize,
     ToTensor,
 )
 
-from utils import VisualWSDDataset
+from datasets import VisualWSDDataset
 
 transform = Compose(
     [

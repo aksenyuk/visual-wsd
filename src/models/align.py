@@ -1,12 +1,6 @@
-from io import BytesIO
-
-import requests
 import torch
-from PIL import Image
-from torchvision import transforms
-from transformers import AlignModel, AlignProcessor
-
 from base_model import BaseModel
+from transformers import AlignModel, AlignProcessor
 
 
 class ALIGNMODEL(BaseModel):
@@ -53,6 +47,12 @@ class ALIGNMODEL(BaseModel):
 
 
 ## EVERYTHING BELOW IS CHECK
+
+# from io import BytesIO
+# import requests
+# from PIL import Image
+# from torchvision import transforms
+
 # image_urls = [
 #     "http://images.cocodataset.org/val2017/000000039769.jpg",
 # ]

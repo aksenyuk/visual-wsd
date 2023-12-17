@@ -81,3 +81,7 @@ chache/
 data/visual_wsd/images/
 
 data/visual_wsd/dataset.csv
+
+tmp.py
+
+lavis

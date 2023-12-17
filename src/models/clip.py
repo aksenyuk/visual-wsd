@@ -1,12 +1,6 @@
-from io import BytesIO
-
-import requests
 import torch
-from PIL import Image
-from torchvision import transforms
-from transformers import CLIPModel, CLIPProcessor
-
 from base_model import BaseModel
+from transformers import CLIPModel, CLIPProcessor
 
 
 class CLIPMODEL(BaseModel):
@@ -53,6 +47,12 @@ class CLIPMODEL(BaseModel):
 
 
 ## EVERYTHING BELOW IS CHECK
+
+# from io import BytesIO
+# import requests
+# from PIL import Image
+# from torchvision import transforms
+
 # image_urls = [
 #     "http://images.cocodataset.org/val2017/000000039769.jpg",
 # ]
