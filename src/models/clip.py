@@ -1,16 +1,16 @@
 import torch
 from base_model import BaseModel
-from transformers import CLIPModel, CLIPProcessor
+from transformers import CLIPModel as CLIP, CLIPProcessor
 
 
-class CLIPMODEL(BaseModel):
+class CLIPModel(BaseModel):
     """
     https://huggingface.co/docs/transformers/model_doc/clip
     """
 
     def __init__(self, model_name):
         super().__init__()
-        self.model = CLIPModel.from_pretrained(model_name)
+        self.model = CLIP.from_pretrained(model_name)
         self.processor = CLIPProcessor.from_pretrained(model_name, do_rescale=False)
 
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -22,9 +22,9 @@ class CLIPMODEL(BaseModel):
         )
         return processed_images
 
-    def process_text(self, texts: list[str]) -> torch.Tensor:
+    def process_text(self, text: str) -> torch.Tensor:
         processed_texts = self.processor(
-            text=texts, return_tensors="pt", padding=True
+            text=text, return_tensors="pt", padding=True
         ).to(self.device)
         return processed_texts
 

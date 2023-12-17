@@ -3,7 +3,7 @@ from base_model import BaseModel
 from transformers import AlignModel, AlignProcessor
 
 
-class ALIGNMODEL(BaseModel):
+class ALIGNModel(BaseModel):
     """
     https://huggingface.co/docs/transformers/model_doc/align
     """
@@ -22,10 +22,8 @@ class ALIGNMODEL(BaseModel):
         )
         return processed_images
 
-    def process_text(self, texts: list[str]) -> torch.Tensor:
-        processed_texts = self.processor(text=texts, return_tensors="pt").to(
-            self.device
-        )
+    def process_text(self, text: str) -> torch.Tensor:
+        processed_texts = self.processor(text=text, return_tensors="pt").to(self.device)
         return processed_texts
 
     def forward(self, images: torch.Tensor, texts: list[str]) -> torch.Tensor:
