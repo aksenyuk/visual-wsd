@@ -26,9 +26,9 @@ class BLIPModel(BaseModel):
         processed_texts = self.processor(text=text, return_tensors="pt").to(self.device)
         return processed_texts
 
-    def forward(self, images: torch.Tensor, texts: list[str]) -> torch.Tensor:
+    def evaluate(self, images: torch.Tensor, texts: list[str]) -> torch.Tensor:
         images = images.to(self.device)
-        logits = torch.zeros(images.shape[0], images.shape[1])
+        logits = torch.zeros(images.shape[0], images.shape[1], device=self.device)
 
         for idx, sample_images in enumerate(images):
             processed_sample_images = self.process_image(sample_images)

@@ -45,7 +45,7 @@ class BaseModel(ABC, nn.Module):
         pass
 
     @abstractmethod
-    def forward(self, images: torch.Tensor, texts: list[str]) -> torch.Tensor:
+    def evaluate(self, images: torch.Tensor, texts: list[str]) -> torch.Tensor:
         """
         The forward pass of the model. Should handle both text and image data, and return a tensor of logits,
         where on first place would be logit for target.

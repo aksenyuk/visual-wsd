@@ -30,7 +30,7 @@ def evaluate_model(
             target, candidate_images = batch["target"], batch["candidate_images"]
             images = torch.cat([target.unsqueeze(1), candidate_images], dim=1)
 
-            logits = model(images, texts)
+            logits = model.evaluate(images, texts)
             probs = F.softmax(logits, dim=1)
 
             top_prob, top_indices = torch.max(probs, dim=1)

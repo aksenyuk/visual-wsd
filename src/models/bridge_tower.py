@@ -26,9 +26,9 @@ class BridgeTowerModel(BaseModel):
     def process_text(self):
         pass
 
-    def forward(self, images: torch.Tensor, texts: list[str]) -> torch.Tensor:
+    def evaluate(self, images: torch.Tensor, texts: list[str]) -> torch.Tensor:
         images = images.to(self.device)
-        logits = torch.zeros(images.shape[0], images.shape[1])
+        logits = torch.zeros(images.shape[0], images.shape[1], device=self.device)
 
         for batch_idx, sample_images in enumerate(images):
             ## I couldn't make model process multiple images, so iterating one by one
