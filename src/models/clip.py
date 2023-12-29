@@ -1,6 +1,7 @@
 import torch
 from base_model import BaseModel
-from transformers import CLIPModel as CLIP, CLIPProcessor
+from transformers import CLIPModel as CLIP
+from transformers import CLIPProcessor
 
 
 class CLIPModel(BaseModel):

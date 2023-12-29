@@ -6,11 +6,10 @@ import numpy as np
 import torch
 from sklearn.metrics import f1_score, precision_score, recall_score
 from torch.utils.data import DataLoader
-from torchvision.transforms import (
+from torchvision.transforms import (  # Normalize,
     CenterCrop,
     Compose,
     InterpolationMode,
-    # Normalize,
     Resize,
     ToTensor,
 )

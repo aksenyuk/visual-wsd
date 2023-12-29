@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
-
 results_metrics_align = {
     "model": "ALIGN",
     "accuracy": 0.12805967829668194,
