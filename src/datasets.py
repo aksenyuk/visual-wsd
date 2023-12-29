@@ -26,7 +26,8 @@ class VisualWSDDataset(Dataset):
         images_folder: str,
         transform: Optional[Compose] = None,
         mode: Literal["train", "eval"] = "eval",
-        train_ratio: float = 0.8,
+        train_ratio: float = 0.9,
+        test_split: bool = False,
     ) -> None:
         self.path = path
         self.df = pd.read_csv(os.path.join(path, csv_file))
@@ -37,8 +38,12 @@ class VisualWSDDataset(Dataset):
 
         if mode == "train":
             self.train_data, self.test_data = train_test_split(
-                self.df, train_size=train_ratio
+                self.df, train_size=train_ratio, random_state=42
             )
+            if test_split:
+                self.data = self.test_data
+            else:
+                self.data = self.train_data
         elif mode == "eval":
             self.data = self.df
         else:
@@ -47,10 +52,7 @@ class VisualWSDDataset(Dataset):
             )
 
     def __len__(self) -> int:
-        if self.mode == "train":
-            return len(self.train_data)
-        else:
-            return len(self.data)
+        return len(self.data)
 
     def __getitem__(self, idx: int) -> dict:
         if self.mode == "train":

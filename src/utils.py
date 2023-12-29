@@ -38,7 +38,7 @@ def get_loaders(
     batch_size: int = 1,
     num_workers: int = 0,
     shuffle: bool = True,
-    split_ratio: float = 0.8,
+    train_ratio: float = 0.9,
 ) -> DataLoader | tuple[DataLoader, DataLoader]:
     if mode == "eval":
         eval_dataset = VisualWSDDataset(
@@ -60,7 +60,7 @@ def get_loaders(
             images_folder=images_folder,
             transform=transform,
             mode="train",
-            split_ratio=split_ratio,
+            train_ratio=train_ratio,
         )
         train_loader = DataLoader(
             train_dataset,
@@ -75,7 +75,7 @@ def get_loaders(
             images_folder=images_folder,
             transform=transform,
             mode="train",
-            split_ratio=split_ratio,
+            train_ratio=train_ratio,
             test_split=True,
         )
         test_loader = DataLoader(
