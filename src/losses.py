@@ -74,3 +74,33 @@ class ContrastiveLoss(AbstractLoss):
                 anchor, other, label_tensor, margin=self.margin
             )
         return loss / len(subsamples)
+
+
+class CrossEntropyLoss(AbstractLoss):
+    def __init__(self, margin=1.0):
+        super().__init__()
+        self.margin = margin
+        self.loss_fn = nn.CrossEntropyLoss()
+
+    def generate_subsamples(self, batch_size, num_images):
+        pairs = []
+        for i in range(batch_size):
+            anchor_idx = i
+            positive_idx = i * num_images
+            negative_indices = [i * num_images + j for j in range(num_images) if j != 0]
+            pairs.append((anchor_idx, positive_idx, 1))
+            for neg_idx in negative_indices:
+                pairs.append((anchor_idx, neg_idx, -1))
+        return pairs
+
+    def forward(self, text_embeddings, image_embeddings, subsamples):
+        loss = torch.tensor(0.0, device=text_embeddings.device)
+        for anchor_idx, other_idx, label in subsamples:
+            anchor = text_embeddings[anchor_idx]
+            other = image_embeddings[other_idx]
+            label_tensor = torch.tensor([label], device=text_embeddings.device)
+            loss += self.loss_fn(
+                anchor, other
+            )
+        return loss / len(subsamples)
+        
