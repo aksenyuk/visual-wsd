@@ -1,5 +1,12 @@
 # Visual Word Sense Disambiguation (Visual-WSD)
 
+## Set up
+```
+python3.11 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
 ## Task
 
 Given a word and some limited textual context, the task is to select among a set of candidate images the one which corresponds to the intended meaning of the target word.
