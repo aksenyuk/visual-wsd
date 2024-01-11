@@ -25,7 +25,7 @@ import aiohttp
 import pandas as pd
 from aiohttp import ClientResponse, ClientTimeout
 
-###### UNCOMMENT THIS IF YOU RUN IN JUPYTER ENVIROMENT
+### UNCOMMENT THIS IF YOU RUN IN JUPYTER ENVIROMENT
 # import nest_asyncio
 # nest_asyncio.apply()
 
@@ -49,7 +49,7 @@ class VisualWSDDownloader:
 
         CUSTOM_TIMEOUT = 99999
         timeout = ClientTimeout(total=CUSTOM_TIMEOUT)
-
+        
         async with aiohttp.ClientSession(timeout=timeout) as session:
             initial_response = await session.get(
                 URL, params={"id": self.file_gdrive_id}
@@ -83,15 +83,28 @@ class VisualWSDDownloader:
             zip_ref.extractall(self.extract_to_path)
 
     def rename_directories(self) -> None:
-        os.chdir("./data/")
-        os.rename("./semeval-2023-task-1-V-WSD-train-v1", "./visual_wsd")
-        os.rename("./visual_wsd/train_v1", "./visual_wsd/train")
-        os.rename("./visual_wsd/trial_v1", "./visual_wsd/trial")
-        os.rename("./visual_wsd/train/train_images_v1", "./visual_wsd/train/images")
-        os.rename("./visual_wsd/trial/trial_images_v1", "./visual_wsd/trial/images")
-        os.chdir("../")
+        original = os.path.join(extract_to_path, "semeval-2023-task-1-V-WSD-train-v1")
+        new = os.path.join(extract_to_path, "visual_wsd")
+        os.rename(original, new)
+        
+        original = os.path.join(extract_to_path, "visual_wsd/train_v1")
+        new = os.path.join(extract_to_path, "visual_wsd/train")
+        os.rename(original, new)
+        
+        original = os.path.join(extract_to_path, "visual_wsd/trial_v1")
+        new = os.path.join(extract_to_path, "visual_wsd/trial")
+        os.rename(original, new)
+        
+        original = os.path.join(extract_to_path, "visual_wsd/train/train_images_v1")
+        new = os.path.join(extract_to_path, "visual_wsd/train/images")
+        os.rename(original, new)
+        
+        original = os.path.join(extract_to_path, "visual_wsd/trial/trial_images_v1")
+        new = os.path.join(extract_to_path, "visual_wsd/trial/images")
+        os.rename(original, new)
+        
         if os.path.exists(self.zip_file_path):
-            print("visual_wsd zip file removed")
+            print("Removed zip file ")
             os.remove(self.zip_file_path)
 
     async def run(self) -> None:
@@ -217,13 +230,13 @@ class VisualWSDRestructurer:
 
 
 async def main():
+    dataPath = "../data/"
     visual_wsd_downloader = VisualWSDDownloader(
-        "1byX4wpe1UjyCVyYrT04sW17NnycKAK7N", "./visual_wsd.zip", "./data/"
+        "1byX4wpe1UjyCVyYrT04sW17NnycKAK7N", "./visual_wsd.zip", dataPath
     )
     await visual_wsd_downloader.run()
-    visual_wsd_restructurer = VisualWSDRestructurer("./data", "visual_wsd")
+    visual_wsd_restructurer = VisualWSDRestructurer(dataPath, "visual_wsd")
     visual_wsd_restructurer.run()
-
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
