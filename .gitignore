@@ -64,26 +64,23 @@ target/
 .ipynb_checkpoints/
 
 .vscode
-
 .pytest_cache
-
+venv
 .env
-
 .idea
-
 .venv
 .ruff_cache
 
 *.exe
+.DS_Store
 
 chache/
 
+visual_wsd.zip
 data/visual_wsd/images/
-
 data/visual_wsd/dataset.csv
+data/flickr8k/
 
 tmp.py
 
 lavis
-
-data/flickr8k/
