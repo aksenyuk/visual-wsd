@@ -64,7 +64,7 @@ class VisualWSDDataset(Dataset):
         try:
             target_image = Image.open(target_img_name).convert("RGB")
         except OSError as e:
-            print(f"\nCorrupted image, placeholder image used. Error message: {e}\n")
+            # print(f"\nCorrupted image, placeholder image used. Error message: {e}\n")
             return self.__getitem__(0)
         if self.transform:
             target_image = self.transform(target_image)
@@ -75,9 +75,7 @@ class VisualWSDDataset(Dataset):
             try:
                 image = Image.open(img_name).convert("RGB")
             except OSError as e:
-                print(
-                    f"\nCorrupted image, placeholder image used. Error message: {e}\n"
-                )
+                # print(f"\nCorrupted image, placeholder image used. Error message: {e}\n")
                 return self.__getitem__(0)
             if self.transform:
                 image = self.transform(image)
