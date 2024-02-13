@@ -6,8 +6,6 @@ Given a word and some limited textual context, the task is to select among a set
 
 More info: [Description](https://raganato.github.io/vwsd/)
 
-Thesis: [Overleaf Project](https://www.overleaf.com/7991619432xsmmnqqxvjsk#9cab2e)
-
 ## Useful resourses
 
 - [Stacked Cross Attention for Image-Text Matching](https://www.microsoft.com/en-us/research/publication/stacked-cross-attention-for-image-text-matching/)
